@@ -6,6 +6,3 @@
 
 # Vagrant Directory
 /.vagrant
-
-# Ubuntu Log File
-ubuntu-xenial-16.04-cloudimg-console.log

@@ -4,7 +4,11 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
 
-  config.vm.synced_folder ".", "/vagrant", type: "nfs", rsync__exclude: [".vagrant/", "Vagrantfile"]
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
+  end
+
+  config.vm.synced_folder ".", "/vagrant", type: "nfs", rsync__exclude: [".vagrant/", "Vagrantfile", "ubuntu-xenial-16.04-cloudimg-console.log"]
 
   config.vm.network "private_network", ip: "192.168.33.99"
     config.vm.provision "shell", inline: <<-SHELL
