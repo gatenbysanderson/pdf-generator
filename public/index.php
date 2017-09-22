@@ -1,5 +1,3 @@
 <?php
 
-require dirname(__DIR__) . '/vendor/autoload.php';
-
-echo "Hello!";
+require dirname(__DIR__) . '/bootstrap/autoload.php';
