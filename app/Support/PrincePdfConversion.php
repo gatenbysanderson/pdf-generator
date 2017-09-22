@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Support;
 
 /* Libraries */
     use App\Libraries\Prince;
