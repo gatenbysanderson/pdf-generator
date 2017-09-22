@@ -31,22 +31,4 @@ interface PdfConversion
      * @throws RuntimeException
      */
     public function get();
-
-    /**
-     * Save the PDF stream as a file.
-     *
-     * @param $output_file
-     * @return bool
-     * @throws RuntimeException
-     */
-    public function save($output_file);
-
-    /**
-     * Save the PDF stream as a file, and overwrite if required.
-     *
-     * @param $output_file
-     * @return bool
-     * @throws RuntimeException
-     */
-    public function forceSave($output_file);
 }

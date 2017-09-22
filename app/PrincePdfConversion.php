@@ -130,65 +130,6 @@ class PrincePdfConversion implements PdfConversion
     }
 
     /**
-     * Save the PDF stream as a file.
-     *
-     * @param $output_file
-     * @return bool
-     * @throws RuntimeException
-     */
-    public function save($output_file)
-    {
-        return $this->saveCompiledFile($output_file, self::OVERWRITE_NOT_ALLOWED);
-    }
-
-    /**
-     * Save the PDF stream as a file, and overwrite if required.
-     *
-     * @param $output_file
-     * @return bool
-     * @throws RuntimeException
-     */
-    public function forceSave($output_file)
-    {
-        return $this->saveCompiledFile($output_file, self::OVERWRITE_OK);
-    }
-
-    /**
-     * Compile the set of files into a PDF stream.
-     *
-     * @param $output_file
-     * @param int $overwrite
-     * @return bool
-     * @throws RuntimeException
-     */
-    private function saveCompiledFile($output_file, $overwrite = self::OVERWRITE_NOT_ALLOWED)
-    {
-        if (! is_string($output_file)) {
-            throw new RuntimeException('Output file must be a string.');
-        }
-
-        // Check if the file name ends with '.pdf'
-        if (! preg_match('/\.pdf$/', $output_file)) {
-            $output_file = $output_file. '.pdf';
-        }
-
-        // Check if the file name already exists where overwriting is not allowed
-        if ($overwrite !== self::OVERWRITE_OK && Storage::exists($output_file)) {
-            throw new RuntimeException('File already exists. Either delete it or call forceSave().');
-        }
-
-        // Get the PDF content
-        $content = $this->getCompiledContent();
-
-        // Save the content into a file within the storage directory
-        if (! Storage::put($output_file, $content)) {
-            throw new RuntimeException('Could not save PDF content to file: ' . $output_file . '. Please check chmod permissions of parent directory.');
-        }
-
-        return true;
-    }
-
-    /**
      * Retrieve the PDF stream.
      *
      * @return string
