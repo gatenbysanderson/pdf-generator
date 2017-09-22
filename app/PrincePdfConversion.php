@@ -12,9 +12,6 @@ namespace App;
     use RuntimeException;
     use Exception;
 
-/* Facades */
-    use Storage;
-
 class PrincePdfConversion implements PdfConversion
 {
 
