@@ -57,15 +57,10 @@ class PrincePdfConversion implements PdfConversion
      * Sets whether JavaScript should be enabled or disabled for this request.
      *
      * @param bool $option
-     * @return $this
-     * @throws RuntimeException
+     * @return PdfConversion
      */
-    public function enableJavaScript($option)
+    public function enableJavaScript(bool $option): PdfConversion
     {
-        if (! is_bool($option)) {
-            throw new RuntimeException('Passed value must be a boolean.');
-        }
-
         $this->enabled['javascript'] = $option;
 
         return $this;
@@ -76,10 +71,10 @@ class PrincePdfConversion implements PdfConversion
      *
      * @param array $files
      * @param array $data
-     * @return $this
+     * @return PdfConversion
      * @throws RuntimeException
      */
-    public function compile(array $files, array $data = [])
+    public function compile(array $files, array $data = []): PdfConversion
     {
         if (empty($files)) {
             throw new RuntimeException('No files provided for conversion.');
@@ -124,7 +119,7 @@ class PrincePdfConversion implements PdfConversion
      * @return string
      * @throws RuntimeException
      */
-    public function get()
+    public function get(): string
     {
         return $this->getCompiledContent();
     }
@@ -135,7 +130,7 @@ class PrincePdfConversion implements PdfConversion
      * @return string
      * @throws RuntimeException
      */
-    private function getCompiledContent()
+    private function getCompiledContent(): string
     {
         if (empty($this->compiled)) {
             throw new RuntimeException('No files provided for conversion.');
@@ -147,12 +142,12 @@ class PrincePdfConversion implements PdfConversion
     /**
      * Compile Blade files into raw PHP.
      *
-     * @param $file
+     * @param string $file
      * @param array $data
      * @return string
      * @throws Exception
      */
-    private function compileBladeView($file, array $data = [])
+    private function compileBladeView(string $file, array $data = []): string
     {
         $find = '/^([a-zA-Z0-9\-_]+)([\.a-zA-Z]+)$/';
         $replace = '$1';

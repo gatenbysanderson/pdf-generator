@@ -9,26 +9,26 @@ interface PdfConversion
      * Sets whether JavaScript should be enabled or disabled for this request.
      *
      * @param bool $option
-     * @return $this
+     * @return PdfConversion
      * @throws RuntimeException
      */
-    public function enableJavaScript($option);
+    public function enableJavaScript(bool $option): self;
 
     /**
      * Compile the set of files into a PDF stream.
      *
      * @param array $files
      * @param array $data
-     * @return $this
+     * @return PdfConversion
      * @throws RuntimeException
      */
-    public function compile(array $files, array $data = []);
+    public function compile(array $files, array $data = []): self;
 
     /**
      * Retrieve the PDF stream.
      *
-     * @return bool
+     * @return string
      * @throws RuntimeException
      */
-    public function get();
+    public function get(): string;
 }
