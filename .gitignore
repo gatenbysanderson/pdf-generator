@@ -1,0 +1,8 @@
+# Composer directory
+/vendor
+
+# IntelliJ directory
+/.idea
+
+# Vagrant directory
+/.vagrant
