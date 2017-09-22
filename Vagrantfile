@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Enable NFS sync
-  config.vm.synced_folder ".", "/vagrant", type: "nfs", rsync__exclude: [".vagrant/", "Vagrantfile", "ubuntu-xenial-16.04-cloudimg-console.log"]
+  config.vm.synced_folder ".", "/vagrant", type: "nfs", rsync__exclude: [".idea/", ".vagrant/", "Vagrantfile", "ubuntu-xenial-16.04-cloudimg-console.log"]
 
   # Install necessary packages and dependencies
   config.vm.network "private_network", ip: "192.168.33.99"
@@ -19,7 +19,10 @@ Vagrant.configure("2") do |config|
         apt-get upgrade --assume-yes
         add-apt-repository ppa:ondrej/php
         apt-get update
-        apt-get install vim php7.1 php7.1-cli php7.1-common php7.1-curl php7.1-gd php7.1-json php7.1-mbstring php7.1-mysql php7.1-opcache php7.1-readline php7.1-xml libapache2-mod-php7.1 apt-transport-https git apache2 --assume-yes
+        echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+        apt-get install vim php7.1 php7.1-cli php7.1-common php7.1-curl php7.1-gd php7.1-json php7.1-mbstring php7.1-mysql php7.1-opcache php7.1-readline php7.1-xml libapache2-mod-php7.1 apt-transport-https git apache2 libcairo2 libgif7 libgomp1 libpixman-1-0 ttf-mscorefonts-installer --assume-yes
+        (cd /) && (wget -O prince.deb http://www.princexml.com/download/prince_11.3-1_ubuntu16.04_amd64.deb)
+        dpkg -i prince.deb
         sed -i -e 's$DocumentRoot /var/www/html$DocumentRoot /vagrant$g' /etc/apache2/sites-available/000-default.conf
         sed -i -e 's$<Directory /var/www/>$<Directory /vagrant/>$g' /etc/apache2/apache2.conf
         systemctl restart apache2
