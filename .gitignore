@@ -1,8 +1,11 @@
-# Composer directory
+# Composer Directory
 /vendor
 
-# IntelliJ directory
+# IntelliJ Directory
 /.idea
 
-# Vagrant directory
+# Vagrant Directory
 /.vagrant
+
+# Ubuntu Log File
+ubuntu-xenial-16.04-cloudimg-console.log
