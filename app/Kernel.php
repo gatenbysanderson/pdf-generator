@@ -2,6 +2,7 @@
 
 namespace App;
 
+/* Core */
 use DI\ContainerBuilder;
 
 class Kernel

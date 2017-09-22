@@ -3,14 +3,14 @@
 namespace App\Support;
 
 /* Libraries */
-    use App\Libraries\Prince;
+use App\Libraries\Prince;
 
 /* Interfaces */
-    use App\Contracts\PdfConversion;
+use App\Contracts\PdfConversion;
 
 /* Exceptions */
-    use RuntimeException;
-    use Exception;
+use RuntimeException;
+use Exception;
 
 class PrincePdfConversion implements PdfConversion
 {
