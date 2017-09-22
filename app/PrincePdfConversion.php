@@ -6,7 +6,7 @@ namespace App;
     use App\Libraries\Prince;
 
 /* Interfaces */
-    use App\Interfaces\PdfConversion;
+    use App\Contracts\PdfConversion;
 
 /* Exceptions */
     use RuntimeException;
