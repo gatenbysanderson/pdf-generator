@@ -74,7 +74,7 @@ class Kernel
      */
     protected function loadEnvironmentVariables()
     {
-        $dotEnv = new Dotenv(dirname(__DIR__));
-        $dotEnv->load();
+        $dot_env = new Dotenv(dirname(__DIR__));
+        $dot_env->load();
     }
 }
