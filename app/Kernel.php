@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Support\HttpRequest;
 use DI\Container;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
@@ -37,7 +38,7 @@ class Kernel
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
         $this->container = $this->builder->build();
-        $this->router = new Router();
+        $this->router = new Router(new HttpRequest());
     }
 
     /**
