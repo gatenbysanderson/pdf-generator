@@ -5,6 +5,7 @@
  *
  * @param string|null $dependency
  * @return \DI\Container|mixed
+ * @throws InvalidArgumentException|\DI\NotFoundException
  */
 function container(string $dependency = null)
 {
