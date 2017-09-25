@@ -33,10 +33,10 @@ class Kernel
      */
     protected function __construct()
     {
+        $this->loadEnvironmentVariables();
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
         $this->container = $this->builder->build();
-        $this->loadEnvironmentVariables();
         $this->router = new Router();
     }
 
