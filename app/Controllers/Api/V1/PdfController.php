@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Api\V1;
 
+use App\Contracts\MetricsLogger;
 use App\Support\HttpRequest;
 use App\Support\JsonResponse;
 
@@ -12,7 +13,6 @@ class PdfController
      */
     public function index(HttpRequest $request)
     {
-        resolve(\App\Contracts\MetricsLogger::class)->log('Testing SQLite', 369);
         JsonResponse::ok($request->all());
     }
 
@@ -21,6 +21,12 @@ class PdfController
      */
     public function store(HttpRequest $request)
     {
-        JsonResponse::created(['name' => 'Ben']);
+        $metrics_logger = resolve(MetricsLogger::class)->start();
+
+        // TODO: Create the PDF.
+
+        $metrics_logger->end()->log('PDF created.');
+
+        JsonResponse::created($request->all());
     }
 }
