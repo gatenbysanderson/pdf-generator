@@ -30,7 +30,7 @@ class Kernel
     /**
      * Kernel constructor.
      */
-    private function __construct()
+    protected function __construct()
     {
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
