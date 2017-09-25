@@ -9,21 +9,6 @@ use Exception;
 
 class PrincePdfConversion implements PdfConversion
 {
-
-    /**
-     * Determines the file at the destination can be overwritten.
-     *
-     * @var int
-     */
-    const OVERWRITE_OK = 1;
-
-    /**
-     * Determines the file at the destination cannot be overwritten.
-     *
-     * @var int
-     */
-    const OVERWRITE_NOT_ALLOWED = 2;
-
     /**
      * Determines what PrinceXML features are enabled or disabled for the request.
      *
