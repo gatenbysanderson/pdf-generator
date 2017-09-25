@@ -63,7 +63,7 @@ class Kernel
     /**
      * @return Router
      */
-    public function router()
+    public function router(): Router
     {
         return $this->router;
     }
