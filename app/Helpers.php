@@ -17,3 +17,15 @@ function container(string $dependency = null)
 
     return $kernel->container()->get($dependency);
 }
+
+/**
+ * Get the resolution of the interface passed.
+ *
+ * @param string $dependency
+ * @return mixed
+ * @throws InvalidArgumentException|\DI\NotFoundException
+ */
+function resolve(string $dependency)
+{
+    return container($dependency);
+}
