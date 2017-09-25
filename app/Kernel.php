@@ -10,22 +10,22 @@ class Kernel
     /**
      * @var \App\Kernel
      */
-    private static $instance;
+    protected static $instance;
 
     /**
      * @var \DI\ContainerBuilder
      */
-    private $builder;
+    protected $builder;
 
     /**
      * @var \DI\Container
      */
-    private $container;
+    protected $container;
 
     /**
      * @var \App\Router
      */
-    private $router;
+    protected $router;
 
     /**
      * Kernel constructor.

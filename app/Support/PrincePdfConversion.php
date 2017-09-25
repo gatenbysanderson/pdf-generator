@@ -14,14 +14,14 @@ class PrincePdfConversion implements PdfConversion
      *
      * @var array
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * The compiled string returned by PrinceXML.
      *
      * @var string
      */
-    private $compiled;
+    protected $compiled;
 
     /**
      * PrincePdfConversion constructor.
@@ -109,7 +109,7 @@ class PrincePdfConversion implements PdfConversion
      * @return string
      * @throws RuntimeException
      */
-    private function getCompiledContent(): string
+    protected function getCompiledContent(): string
     {
         if (empty($this->compiled)) {
             throw new RuntimeException('No files provided for conversion.');
@@ -126,7 +126,7 @@ class PrincePdfConversion implements PdfConversion
      * @return string
      * @throws Exception
      */
-    private function compileBladeView(string $file, array $data = []): string
+    protected function compileBladeView(string $file, array $data = []): string
     {
         $find = '/^([a-zA-Z0-9\-_]+)([\.a-zA-Z]+)$/';
         $replace = '$1';
