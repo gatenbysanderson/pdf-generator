@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DI\Container;
 use DI\ContainerBuilder;
 
 class Kernel
@@ -52,12 +53,11 @@ class Kernel
     }
 
     /**
-     * @param string $class
-     * @return mixed
+     * @return \DI\Container
      */
-    public function resolve(string $class)
+    public function container(): Container
     {
-        return $this->container->get($class);
+        return $this->container;
     }
 
     /**

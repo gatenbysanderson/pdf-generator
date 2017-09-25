@@ -24,6 +24,6 @@ class Router
      */
     public function handle(array $request)
     {
-        //
+        var_dump($request);
     }
 }
