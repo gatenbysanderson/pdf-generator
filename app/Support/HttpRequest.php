@@ -41,4 +41,12 @@ class HttpRequest
     {
         return $this->has($key) ? $this->request[$key] : $default;
     }
+
+    /**
+     * @return array
+     */
+    public function all(): array
+    {
+        return $this->request;
+    }
 }
