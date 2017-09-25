@@ -6,3 +6,6 @@
 
 # Vagrant Directory
 /.vagrant
+
+# Environment Variables
+.env

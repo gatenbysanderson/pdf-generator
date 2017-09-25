@@ -4,6 +4,7 @@ namespace App;
 
 use DI\Container;
 use DI\ContainerBuilder;
+use Dotenv\Dotenv;
 
 class Kernel
 {
@@ -34,9 +35,8 @@ class Kernel
     {
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
-
         $this->container = $this->builder->build();
-
+        $this->loadEnvironmentVariables();
         $this->router = new Router();
     }
 
@@ -66,5 +66,14 @@ class Kernel
     public function router(): Router
     {
         return $this->router;
+    }
+
+    /**
+     * @return void
+     */
+    protected function loadEnvironmentVariables()
+    {
+        $dotEnv = new Dotenv(dirname(__DIR__));
+        $dotEnv->load();
     }
 }
