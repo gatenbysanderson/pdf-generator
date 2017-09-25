@@ -26,8 +26,17 @@ class Router
      */
     public function handle()
     {
-        $uriParts = $this->getUriParts();
-        var_dump($this->request, $uriParts);
+        $uri_parts = $this->getUriParts();
+        //var_dump($this->request, $uri_parts);
+
+        switch ($this->getUriSegment(0)) {
+            case 'api':
+                echo 'API ACCESSED';
+                break;
+            default:
+                $this->throwPageNotFoundException();
+                break;
+        }
     }
 
     /**
@@ -42,5 +51,29 @@ class Router
         $request_uri = trim($request_uri, '/');
 
         return explode('/', $request_uri);
+    }
+
+    /**
+     * @param int $index
+     * @return mixed|null
+     */
+    protected function getUriSegment(int $index)
+    {
+        $uri_parts = $this->getUriParts();
+
+        if (array_key_exists($index, $uri_parts)) {
+            return $uri_parts[$index];
+        }
+
+        return null;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function throwPageNotFoundException()
+    {
+        header('HTTP/1.1 404 Not Found');
+        throw new \Exception('Page not found.', 404);
     }
 }
