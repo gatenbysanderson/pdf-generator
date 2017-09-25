@@ -89,7 +89,7 @@ class PrincePdfConversion implements PdfConversion
             } else {
                 ob_start();
 
-                require_once($file);
+                require_once $file;
 
                 $compiled[] = ob_get_clean();
             }
