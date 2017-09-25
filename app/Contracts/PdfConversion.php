@@ -10,7 +10,7 @@ interface PdfConversion
      *
      * @param bool $option
      * @return PdfConversion
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function enableJavaScript(bool $option): self;
 
@@ -19,7 +19,7 @@ interface PdfConversion
      *
      * @param array $files
      * @return PdfConversion
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function compile(array $files): self;
 
@@ -27,7 +27,7 @@ interface PdfConversion
      * Retrieve the PDF stream.
      *
      * @return string
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function get(): string;
 }
