@@ -50,11 +50,10 @@ class PrincePdfConversion implements PdfConversion
      * Compile the set of files into a PDF stream.
      *
      * @param array $files
-     * @param array $data
      * @return PdfConversion
      * @throws RuntimeException
      */
-    public function compile(array $files, array $data = []): PdfConversion
+    public function compile(array $files): PdfConversion
     {
         if (empty($files)) {
             throw new RuntimeException('No files provided for conversion.');
@@ -70,7 +69,7 @@ class PrincePdfConversion implements PdfConversion
 
         foreach ($files as $file) {
             if (preg_match('/\.blade\.php$/', basename($file))) {
-                $compiled[] = $this->compileBladeView($file, $data);
+                $compiled[] = $this->compileBladeView($file);
             } else {
                 ob_start();
 

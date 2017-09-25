@@ -18,11 +18,10 @@ interface PdfConversion
      * Compile the set of files into a PDF stream.
      *
      * @param array $files
-     * @param array $data
      * @return PdfConversion
      * @throws RuntimeException
      */
-    public function compile(array $files, array $data = []): self;
+    public function compile(array $files): self;
 
     /**
      * Retrieve the PDF stream.
