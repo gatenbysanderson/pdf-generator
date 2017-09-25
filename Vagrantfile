@@ -27,8 +27,10 @@ Vagrant.configure("2") do |config|
         fi;
         sed -i -e 's$DocumentRoot /var/www/html$DocumentRoot /vagrant/public$g' /etc/apache2/sites-available/000-default.conf
         sed -i -e 's$<Directory /var/www/>$<Directory /vagrant/>$g' /etc/apache2/apache2.conf
+        sed -i '/<Directory \/vagrant\/>/!b;n;n;c\tAllowOveride all' /etc/apache2/apache2.conf
         sed -i -e 's$display_errors = Off$display_errors = On$g' /etc/php/7.1/apache2/php.ini
         sed -i -e 's/error_reporting = E_ALL \\& ~E_DEPRECATED \\& ~E_STRICT/error_reporting = E_ALL \\& ~E_NOTICE \\& ~E_DEPRECATED \\& ~E_STRICT/g' /etc/php/7.1/apache2/php.ini
+        a2enmod rewrite
         systemctl restart apache2
         (echo -e "syntax on\nset ai" > /root/.vimrc) && (cp /root/.vimrc /home/ubuntu/.vimrc)
         if ! type "composer" > /dev/null 2>&1; then
