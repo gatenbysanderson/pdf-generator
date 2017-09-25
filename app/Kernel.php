@@ -9,32 +9,34 @@ class Kernel
     /**
      * @var \App\Kernel
      */
-    protected static $instance;
+    private static $instance;
 
     /**
      * @var \DI\ContainerBuilder
      */
-    protected $builder;
+    private $builder;
 
     /**
      * @var \DI\Container
      */
-    protected $container;
+    private $container;
 
     /**
      * @var \App\Router
      */
-    protected $router;
+    private $router;
 
     /**
      * Kernel constructor.
      */
-    protected function __construct()
+    private function __construct()
     {
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
 
         $this->container = $this->builder->build();
+
+        $this->router = new Router($this);
     }
 
     /**
@@ -59,12 +61,10 @@ class Kernel
     }
 
     /**
-     * @param array $request
+     * @return Router
      */
-    public function handle(array $request)
+    public function router()
     {
-        $router = new Router($this);
-
-        $router->handle($request);
+        return $this->router;
     }
 }
