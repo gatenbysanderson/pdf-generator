@@ -36,7 +36,7 @@ class Kernel
     {
         $this->loadEnvironmentVariables();
         $this->builder = new ContainerBuilder();
-        $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
+        $this->builder->addDefinitions(basePath('config/definitions.php'));
         $this->container = $this->builder->build();
         $this->router = new Router(new HttpRequest());
     }
@@ -74,7 +74,7 @@ class Kernel
      */
     protected function loadEnvironmentVariables()
     {
-        $dot_env = new Dotenv(dirname(__DIR__));
+        $dot_env = new Dotenv(basePath());
         $dot_env->load();
     }
 }
