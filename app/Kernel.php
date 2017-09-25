@@ -37,7 +37,7 @@ class Kernel
 
         $this->container = $this->builder->build();
 
-        $this->router = new Router($this);
+        $this->router = new Router();
     }
 
     /**
