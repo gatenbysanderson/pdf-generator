@@ -1,5 +1,5 @@
 <?php
 
-require basePath('vendor/autoload.php');
+require realpath(dirname(__DIR__) . '/vendor/autoload.php');
 
 $kernel = App\Kernel::instance();

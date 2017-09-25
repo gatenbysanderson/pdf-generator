@@ -12,7 +12,7 @@ interface PdfConversion
      * @return PdfConversion
      * @throws \RuntimeException
      */
-    public function enableJavaScript(bool $option): self;
+    public function enableJavaScript(bool $option = true): self;
 
     /**
      * Compile the set of files into a PDF stream.

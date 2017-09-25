@@ -36,7 +36,7 @@ class Kernel
     {
         $this->loadEnvironmentVariables();
         $this->builder = new ContainerBuilder();
-        $this->builder->addDefinitions(basePath('config/definitions.php'));
+        $this->builder->addDefinitions(basePath('bootstrap/definitions.php'));
         $this->container = $this->builder->build();
         $this->router = new Router(new HttpRequest());
     }

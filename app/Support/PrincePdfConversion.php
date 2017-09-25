@@ -39,7 +39,7 @@ class PrincePdfConversion implements PdfConversion
      * @param bool $option
      * @return PdfConversion
      */
-    public function enableJavaScript(bool $option): PdfConversion
+    public function enableJavaScript(bool $option = true): PdfConversion
     {
         $this->enabled['javascript'] = $option;
 
