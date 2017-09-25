@@ -26,9 +26,6 @@ class Router
      */
     public function handle()
     {
-        $uri_parts = $this->getUriParts();
-        //var_dump($this->request, $uri_parts);
-
         switch ($this->getUriSegment(0)) {
             case 'api':
                 echo 'API ACCESSED';
