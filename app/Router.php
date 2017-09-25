@@ -26,6 +26,21 @@ class Router
      */
     public function handle()
     {
-        var_dump($this->request);
+        $uriParts = $this->getUriParts();
+        var_dump($this->request, $uriParts);
+    }
+
+    /**
+     * Get the URI without the query string at the end.
+     *
+     * @return array
+     */
+    protected function getUriParts(): array
+    {
+        $request_uri = $_SERVER['REQUEST_URI'] . '?';
+        $request_uri = substr($request_uri, 0, strpos($request_uri, '?'));
+        $request_uri = trim($request_uri, '/');
+
+        return explode('/', $request_uri);
     }
 }
