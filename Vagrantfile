@@ -35,5 +35,6 @@ Vagrant.configure("2") do |config|
           cd / && curl -sS https://getcomposer.org/installer | php
           mv composer.phar /usr/local/bin/composer
         fi;
+        sh /vagrant/scripts/aliases.sh
     SHELL
   end
