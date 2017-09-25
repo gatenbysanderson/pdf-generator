@@ -1,7 +1,5 @@
 <?php
 
-require dirname(__DIR__) . '/vendor/autoload.php';
-
-$kernel = App\Kernel::instance();
+require basePath('bootstrap/autoload.php');
 
 $kernel->router()->handle();
