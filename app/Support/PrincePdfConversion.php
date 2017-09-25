@@ -2,13 +2,8 @@
 
 namespace App\Support;
 
-/* Libraries */
-use App\Libraries\Prince;
-
-/* Interfaces */
 use App\Contracts\PdfConversion;
-
-/* Exceptions */
+use App\Libraries\Prince;
 use RuntimeException;
 use Exception;
 

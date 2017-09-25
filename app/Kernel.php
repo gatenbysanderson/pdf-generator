@@ -2,7 +2,6 @@
 
 namespace App;
 
-/* Core */
 use DI\ContainerBuilder;
 
 class Kernel
@@ -34,6 +33,7 @@ class Kernel
     {
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(dirname(__DIR__) . '/config/definitions.php');
+
         $this->container = $this->builder->build();
     }
 
@@ -64,6 +64,7 @@ class Kernel
     public function handle(array $request)
     {
         $router = new Router($this);
+
         $router->handle($request);
     }
 }
