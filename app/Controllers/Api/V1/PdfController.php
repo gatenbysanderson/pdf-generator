@@ -12,6 +12,7 @@ class PdfController
      */
     public function index(HttpRequest $request)
     {
+        resolve(\App\Contracts\MetricsLogger::class)->log('Testing SQLite', 369);
         JsonResponse::ok($request->all());
     }
 

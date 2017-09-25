@@ -9,3 +9,6 @@
 
 # Environment Variables
 .env
+
+# Database
+/database

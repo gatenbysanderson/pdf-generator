@@ -29,3 +29,14 @@ function resolve(string $dependency)
 {
     return container($dependency);
 }
+
+/**
+ * Get the project root path.
+ *
+ * @param string $path
+ * @return string
+ */
+function basePath(string $path = ''): string
+{
+    return dirname(__DIR__) . '/' . trim($path, '/');
+}
