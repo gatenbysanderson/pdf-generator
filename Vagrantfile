@@ -15,28 +15,11 @@ Vagrant.configure("2") do |config|
   # Install necessary packages and dependencies
   config.vm.network "private_network", ip: "192.168.33.99"
     config.vm.provision "shell", inline: <<-SHELL
-        apt-get update
-        apt-get upgrade --assume-yes
-        add-apt-repository ppa:ondrej/php
-        apt-get update
-        echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-        apt-get install vim php7.1 php7.1-cli php7.1-common php7.1-curl php7.1-gd php7.1-json php7.1-mbstring php7.1-mysql php7.1-opcache php7.1-readline php7.1-xml libapache2-mod-php7.1 sqlite3 apt-transport-https git apache2 libcairo2 libgif7 libgomp1 libpixman-1-0 ttf-mscorefonts-installer --assume-yes
-        if ! type "prince" > /dev/null 2>&1; then
-          (cd /) && (wget -O prince.deb http://www.princexml.com/download/prince_11.3-1_ubuntu16.04_amd64.deb)
-          (dpkg -i prince.deb) && (rm -f prince.deb)
-        fi;
-        sed -i -e 's$DocumentRoot /var/www/html$DocumentRoot /vagrant/public$g' /etc/apache2/sites-available/000-default.conf
-        sed -i -e 's$<Directory /var/www/>$<Directory /vagrant/>$g' /etc/apache2/apache2.conf
-        sed -i '/<Directory \/vagrant\/>/!b;n;n;c\\tAllowOverride all' /etc/apache2/apache2.conf
-        sed -i -e 's$display_errors = Off$display_errors = On$g' /etc/php/7.1/apache2/php.ini
-        sed -i -e 's/error_reporting = E_ALL \\& ~E_DEPRECATED \\& ~E_STRICT/error_reporting = E_ALL \\& ~E_NOTICE \\& ~E_DEPRECATED \\& ~E_STRICT/g' /etc/php/7.1/apache2/php.ini
-        a2enmod rewrite
-        systemctl restart apache2
-        (echo -e "syntax on\nset ai" > /root/.vimrc) && (cp /root/.vimrc /home/ubuntu/.vimrc)
-        if ! type "composer" > /dev/null 2>&1; then
-          cd / && curl -sS https://getcomposer.org/installer | php
-          mv composer.phar /usr/local/bin/composer
-        fi;
+        sh /vagrant/scripts/apt.sh
+        sh /vagrant/scripts/php.sh
+        sh /vagrant/scripts/apache.sh
+        sh /vagrant/scripts/vim.sh
+        sh /vagrant/scripts/composer.sh
         sh /vagrant/scripts/aliases.sh
     SHELL
   end
