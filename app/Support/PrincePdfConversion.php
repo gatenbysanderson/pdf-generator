@@ -61,34 +61,14 @@ class PrincePdfConversion implements PdfConversion
         }
 
         $prince = new Prince('/usr/bin/prince');
-
         $prince->setPageMargin('45px');
-
         $prince->setCompress(false);
 
-        $compiled = [];
-
-        foreach ($files as $file) {
-            if (preg_match('/\.blade\.php$/', basename($file))) {
-                $compiled[] = $this->compileBladeView($file);
-            } else {
-                ob_start();
-
-                require_once $file;
-
-                $compiled[] = ob_get_clean();
-            }
-        }
-
-        ob_start();
-
-        $conversion = $prince->convert_string_to_passthru(implode($compiled));
+        $conversion = $prince->convert_string_to_passthru(implode($files));
 
         if ($conversion !== true) {
             throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
-
-        $this->compiled = ob_get_clean();
 
         return $this;
     }

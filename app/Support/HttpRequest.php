@@ -55,4 +55,20 @@ class HttpRequest
     {
         return $this->request;
     }
+
+    /**
+     * Retrieves all files from the request if no key is given,
+     * or a specific file if a key is given.
+     *
+     * @param string|null $key
+     * @return array|null
+     */
+    public function files(string $key = null)
+    {
+        if ($key === null) {
+            return $this->files;
+        }
+
+        return array_key_exists($key, $this->files) ? $this->files([$key]) : null;
+    }
 }

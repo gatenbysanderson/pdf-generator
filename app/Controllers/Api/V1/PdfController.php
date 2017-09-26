@@ -5,6 +5,7 @@ namespace App\Controllers\Api\V1;
 use App\Contracts\MetricsLogger;
 use App\Contracts\PdfConversion;
 use App\Exceptions\PdfCompileException;
+use App\Exceptions\PdfNoFilesException;
 use App\Support\HttpRequest;
 use App\Support\JsonResponse;
 use Exception;
@@ -36,6 +37,8 @@ class PdfController
             $metrics_logger->end()->log('PDF created.');
 
             JsonResponse::created(['pdf' => $pdf]);
+        } catch (PdfNoFilesException $exception) {
+            JsonResponse::badRequest('No files provided.');
         } catch (PdfCompileException $exception) {
             JsonResponse::badRequest('Could not compile PDF.');
         } catch (Exception $exception) {
