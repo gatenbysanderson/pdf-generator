@@ -63,13 +63,12 @@ class PrincePdfConversion implements PdfConversion
         $prince->setPageMargin('45px');
         $prince->setCompress(false);
 
-        ob_start();
-        $conversion = $prince->convert_string_to_passthru(implode($files));
+        $conversion = $prince->convert_string_to_file(implode($files), storagePath('test.pdf'));
 
         if ($conversion !== true) {
             throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
-        $this->compiled = ob_get_clean();
+        $this->compiled = file_get_contents(storagePath('test.pdf'));
 
         return $this;
     }
