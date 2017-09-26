@@ -4,8 +4,10 @@ namespace App\Controllers\Api\V1;
 
 use App\Contracts\MetricsLogger;
 use App\Contracts\PdfConversion;
+use App\Exceptions\PdfCompileException;
 use App\Support\HttpRequest;
 use App\Support\JsonResponse;
+use Exception;
 
 class PdfController
 {
@@ -30,7 +32,9 @@ class PdfController
 
         try {
             $pdf = $pdfConversion->enableJavaScript()->compile($files)->get();
-        } catch (\RuntimeException $exception) {
+        } catch (PdfCompileException $exception) {
+            JsonResponse::badRequest('Could not compile PDF.');
+        } catch (Exception $exception) {
             JsonResponse::badRequest('Could not generate PDF.');
         }
 
