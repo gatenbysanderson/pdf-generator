@@ -40,3 +40,13 @@ function basePath(string $path = ''): string
 {
     return realpath(dirname(__DIR__)) . '/' . trim($path, '/');
 }
+
+
+/**
+ * Die and dump.
+ */
+function dd()
+{
+    var_dump(func_get_args());
+    die;
+}
