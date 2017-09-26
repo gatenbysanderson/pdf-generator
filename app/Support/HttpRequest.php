@@ -57,6 +57,15 @@ class HttpRequest
     }
 
     /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasFile(string $key): bool
+    {
+        return array_key_exists($key, $this->files);
+    }
+
+    /**
      * Retrieves all files from the request if no key is given,
      * or a specific file if a key is given.
      *
@@ -69,6 +78,15 @@ class HttpRequest
             return $this->files;
         }
 
-        return array_key_exists($key, $this->files) ? $this->files([$key]) : null;
+        return $this->hasFile($key) ? $this->files[$key] : null;
+    }
+
+    /**
+     * @param string $key
+     * @return array|null
+     */
+    public function file(string $key)
+    {
+        return $this->files($key);
     }
 }
