@@ -30,7 +30,7 @@ class PdfController
 
             $metrics_logger->end()->log('PDF created.');
 
-            JsonResponse::created(['type' => 'application/pdf', 'content' => utf8_encode($pdf)]);
+            JsonResponse::created(['type' => 'application/pdf', 'content' => base64_encode($pdf)]);
         } catch (PdfNoFilesException $exception) {
             JsonResponse::badRequest('No files provided.');
         } catch (PdfCompileException $exception) {
