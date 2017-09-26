@@ -24,6 +24,8 @@ class HttpRequest
     }
 
     /**
+     * Check if the request has the specified key.
+     *
      * @param string $key
      * @return bool
      */
@@ -33,6 +35,8 @@ class HttpRequest
     }
 
     /**
+     * Retrieve the value from the specified key in the request.
+     *
      * @param string $key
      * @param null $default
      * @return mixed|null
@@ -43,6 +47,8 @@ class HttpRequest
     }
 
     /**
+     * Retrieve all keys and values in the request.
+     *
      * @return array
      */
     public function all(): array

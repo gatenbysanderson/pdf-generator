@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Support\HttpRequest;
+use Exception;
 
 class Router
 {
@@ -22,6 +23,8 @@ class Router
     }
 
     /**
+     * Handle the incoming request.
+     *
      * @return void
      */
     public function handle()
@@ -70,15 +73,20 @@ class Router
     }
 
     /**
-     * @throws \Exception
+     * Throw an exception and return an HTTP 404 status code.
+     *
+     * @throws Exception
      */
     protected function throwPageNotFoundException()
     {
         header('HTTP/1.1 404 Not Found');
-        throw new \Exception('Page not found.', 404);
+
+        throw new Exception('Page not found.', 404);
     }
 
     /**
+     * Return the full path to the controller from the request URI.
+     *
      * @return string
      */
     protected function getControllerClass(): string

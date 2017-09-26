@@ -35,6 +35,7 @@ class Kernel
     protected function __construct()
     {
         $this->loadEnvironmentVariables();
+        
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions(basePath('bootstrap/definitions.php'));
         $this->container = $this->builder->build();
@@ -42,6 +43,8 @@ class Kernel
     }
 
     /**
+     * Return the kernel as a singleton.
+     *
      * @return \App\Kernel
      */
     public static function instance(): self
@@ -54,6 +57,8 @@ class Kernel
     }
 
     /**
+     * Return the container as a singleton.
+     *
      * @return \DI\Container
      */
     public function container(): Container
@@ -62,6 +67,8 @@ class Kernel
     }
 
     /**
+     * Return the router as a singleton.
+     *
      * @return Router
      */
     public function router(): Router
@@ -70,6 +77,8 @@ class Kernel
     }
 
     /**
+     * Initialise the environment variables.
+     *
      * @return void
      */
     protected function loadEnvironmentVariables()

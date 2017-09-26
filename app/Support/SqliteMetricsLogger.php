@@ -32,6 +32,8 @@ class SqliteMetricsLogger implements MetricsLogger
     }
 
     /**
+     * Set the message for the log.
+     *
      * @param string $message
      * @return bool
      */
@@ -70,6 +72,8 @@ class SqliteMetricsLogger implements MetricsLogger
     }
 
     /**
+     * Return the total execution time between the start and end.
+     *
      * @return int
      * @throws \RuntimeException
      */

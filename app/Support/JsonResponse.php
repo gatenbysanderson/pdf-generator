@@ -9,11 +9,14 @@ class JsonResponse
      */
     protected function __construct()
     {
-        // Don't allow instantiation;
+        // Don't allow instantiation
     }
 
     /**
+     * Return an HTTP 200 status.
+     *
      * @param array $payload
+     * @return void
      */
     public static function ok(array $payload = [])
     {
@@ -23,7 +26,10 @@ class JsonResponse
     }
 
     /**
+     * Return an HTTP 201 status.
+     *
      * @param array $payload
+     * @return void
      */
     public static function created(array $payload = [])
     {
@@ -33,7 +39,10 @@ class JsonResponse
     }
 
     /**
+     * Return an HTTP 400 status.
+     *
      * @param string $message
+     * @return void
      */
     public static function badRequest(string $message = 'Bad Request')
     {
