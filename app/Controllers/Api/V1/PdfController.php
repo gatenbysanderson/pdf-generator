@@ -21,12 +21,15 @@ class PdfController
             $metrics_logger = resolve(MetricsLogger::class)->start();
             $pdf_conversion = resolve(PdfConversion::class);
 
+            $enable_java_script = array_key_exists('javascript', $request->input('options', []))
+                ? (bool)$request->input('options')['javascript']
+                : false;
             $files = $request->files()['sources']['tmp_name'];
             $files = array_map(function ($file) {
                 return file_get_contents($file);
             }, $files);
 
-            $pdf = $pdf_conversion->enableJavaScript()->compile($files)->get();
+            $pdf = $pdf_conversion->enableJavaScript($enable_java_script)->compile($files)->get();
 
             $metrics_logger->end()->log('PDF created.');
 
