@@ -44,6 +44,8 @@ function basePath(string $path = ''): string
 
 /**
  * Die and dump.
+ *
+ * @return void
  */
 function dd()
 {
