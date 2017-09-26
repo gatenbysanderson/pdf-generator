@@ -4,6 +4,12 @@ namespace App\Contracts;
 
 interface PdfConversion
 {
+    /**
+     * PdfConversion constructor.
+     *
+     * @param \App\Contracts\MetricsLogger $metrics_logger
+     */
+    public function __construct(MetricsLogger $metrics_logger);
 
     /**
      * Sets whether JavaScript should be enabled or disabled for this request.

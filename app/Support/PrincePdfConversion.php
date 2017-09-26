@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Contracts\MetricsLogger;
 use App\Contracts\PdfConversion;
 use App\Exceptions\PdfCompileException;
 use App\Libraries\Prince;
@@ -9,6 +10,11 @@ use RuntimeException;
 
 class PrincePdfConversion implements PdfConversion
 {
+    /**
+     * @var \App\Contracts\MetricsLogger
+     */
+    protected $metrics_logger;
+
     /**
      * Determines what PrinceXML features are enabled or disabled for the request.
      *
@@ -25,9 +31,12 @@ class PrincePdfConversion implements PdfConversion
 
     /**
      * PrincePdfConversion constructor.
+     *
+     * @param \App\Contracts\MetricsLogger $metrics_logger
      */
-    public function __construct()
+    public function __construct(MetricsLogger $metrics_logger)
     {
+        $this->metrics_logger = $metrics_logger;
         $this->enabled = [
             'javascript' => false,
         ];
@@ -59,6 +68,8 @@ class PrincePdfConversion implements PdfConversion
             throw new RuntimeException('No files provided for conversion.');
         }
 
+        $this->metrics_logger->start();
+
         $prince = new Prince('/usr/bin/prince');
         $prince->setPageMargin('45px');
         $prince->setCompress(false);
@@ -70,6 +81,8 @@ class PrincePdfConversion implements PdfConversion
             throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
         $this->compiled = ob_get_clean();
+
+        $this->metrics_logger->end()->log('PDF created.');
 
         return $this;
     }

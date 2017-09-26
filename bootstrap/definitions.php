@@ -1,6 +1,6 @@
 <?php
 
 return [
-    App\Contracts\PdfConversion::class => new App\Support\PrincePdfConversion(),
-    App\Contracts\MetricsLogger::class => new App\Support\SqliteMetricsLogger(),
+    App\Contracts\PdfConversion::class => DI\object(App\Support\PrincePdfConversion::class),
+    App\Contracts\MetricsLogger::class => DI\object(App\Support\SqliteMetricsLogger::class),
 ];

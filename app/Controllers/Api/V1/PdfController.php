@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Api\V1;
 
-use App\Contracts\MetricsLogger;
 use App\Contracts\PdfConversion;
 use App\Exceptions\PdfCompileException;
 use App\Exceptions\PdfNoFilesException;
@@ -18,7 +17,6 @@ class PdfController
     public function store(HttpRequest $request)
     {
         try {
-            $metrics_logger = resolve(MetricsLogger::class)->start();
             $pdf_conversion = resolve(PdfConversion::class);
 
             $enable_java_script = array_key_exists('javascript', $request->input('options', []))
@@ -31,8 +29,6 @@ class PdfController
             }, $files);
 
             $pdf = $pdf_conversion->enableJavaScript($enable_java_script)->compile($files)->get();
-
-            $metrics_logger->end()->log('PDF created.');
 
             JsonResponse::created([
                 'type' => 'application/pdf',
