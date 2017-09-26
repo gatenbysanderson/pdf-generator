@@ -41,6 +41,27 @@ function basePath(string $path = ''): string
     return realpath(dirname(__DIR__)) . '/' . trim($path, '/');
 }
 
+/**
+ * Get the public path.
+ *
+ * @param string $path
+ * @return string
+ */
+function publicPath(string $path = ''): string
+{
+    return basePath('public/' . trim($path, '/'));
+}
+
+/**
+ * Get the storage path.
+ *
+ * @param string $path
+ * @return string
+ */
+function storagePath(string $path = ''): string
+{
+    return basePath('storage/' . trim($path, '/'));
+}
 
 /**
  * Die and dump.

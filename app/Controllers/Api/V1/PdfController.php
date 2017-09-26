@@ -29,8 +29,10 @@ class PdfController
             $metrics_logger = resolve(MetricsLogger::class)->start();
             $pdfConversion = resolve(PdfConversion::class);
 
-            $files = $request->input('files');
-            $files = is_array($files) ? $files : [$files];
+            $files = $request->files()['sources']['tmp_name'];
+            $files = array_map(function ($file) {
+                return file_get_contents($file);
+            }, $files);
 
             $pdf = $pdfConversion->enableJavaScript()->compile($files)->get();
 

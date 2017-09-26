@@ -8,6 +8,11 @@ use SQLite3;
 class SqliteMetricsLogger implements MetricsLogger
 {
     /**
+     * Used to get the microtime as a float.
+     */
+    protected const MICROTIME_AS_FLOAT = true;
+
+    /**
      * @var \SQLite3
      */
     protected $db;
@@ -54,7 +59,7 @@ class SqliteMetricsLogger implements MetricsLogger
      */
     public function start(): MetricsLogger
     {
-        $this->start_time_in_milliseconds = microtime();
+        $this->start_time_in_milliseconds = $this->microtimeInMilliseconds();
 
         return $this;
     }
@@ -66,7 +71,7 @@ class SqliteMetricsLogger implements MetricsLogger
      */
     public function end(): MetricsLogger
     {
-        $this->end_time_in_milliseconds = microtime();
+        $this->end_time_in_milliseconds = $this->microtimeInMilliseconds();
 
         return $this;
     }
@@ -88,5 +93,13 @@ class SqliteMetricsLogger implements MetricsLogger
         }
 
         return $this->end_time_in_milliseconds - $this->start_time_in_milliseconds;
+    }
+
+    /**
+     * @return int
+     */
+    protected function microtimeInMilliseconds(): int
+    {
+        return (int)(microtime(static::MICROTIME_AS_FLOAT) * 1000);
     }
 }

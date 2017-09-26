@@ -6,7 +6,6 @@ use App\Contracts\PdfConversion;
 use App\Exceptions\PdfCompileException;
 use App\Libraries\Prince;
 use RuntimeException;
-use Exception;
 
 class PrincePdfConversion implements PdfConversion
 {
@@ -64,11 +63,13 @@ class PrincePdfConversion implements PdfConversion
         $prince->setPageMargin('45px');
         $prince->setCompress(false);
 
+        ob_start();
         $conversion = $prince->convert_string_to_passthru(implode($files));
 
         if ($conversion !== true) {
             throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
+        $this->compiled = ob_get_clean();
 
         return $this;
     }
@@ -97,29 +98,5 @@ class PrincePdfConversion implements PdfConversion
         }
 
         return $this->compiled;
-    }
-
-    /**
-     * Compile Blade files into raw PHP.
-     *
-     * @param string $file
-     * @param array $data
-     * @return string
-     * @throws Exception
-     */
-    protected function compileBladeView(string $file, array $data = []): string
-    {
-        $find = '/^([a-zA-Z0-9\-_]+)([\.a-zA-Z]+)$/';
-        $replace = '$1';
-
-        $path = $this->path . $this->delimiter . preg_replace($find, $replace, basename($file));
-
-        try {
-            $compiled = view($path, $data)->render();
-        } catch (Exception $e) {
-            throw $e;
-        }
-
-        return $compiled;
     }
 }
