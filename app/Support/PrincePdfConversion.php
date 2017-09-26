@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Contracts\PdfConversion;
+use App\Exceptions\PdfCompileException;
 use App\Libraries\Prince;
 use RuntimeException;
 use Exception;
@@ -84,7 +85,7 @@ class PrincePdfConversion implements PdfConversion
         $conversion = $prince->convert_string_to_passthru(implode($compiled));
 
         if ($conversion !== true) {
-            throw new RuntimeException('Failed to compile the HTML file(s) into PDF format.');
+            throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
 
         $this->compiled = ob_get_clean();
