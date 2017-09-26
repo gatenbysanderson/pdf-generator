@@ -24,22 +24,22 @@ class PdfController
      */
     public function store(HttpRequest $request)
     {
-        $metrics_logger = resolve(MetricsLogger::class)->start();
-        $pdfConversion = resolve(PdfConversion::class);
-
-        $files = $request->input('files');
-        $files = is_array($files) ? $files : [$files];
-
         try {
+            $metrics_logger = resolve(MetricsLogger::class)->start();
+            $pdfConversion = resolve(PdfConversion::class);
+
+            $files = $request->input('files');
+            $files = is_array($files) ? $files : [$files];
+
             $pdf = $pdfConversion->enableJavaScript()->compile($files)->get();
+
+            $metrics_logger->end()->log('PDF created.');
+
+            JsonResponse::created(['pdf' => $pdf]);
         } catch (PdfCompileException $exception) {
             JsonResponse::badRequest('Could not compile PDF.');
         } catch (Exception $exception) {
             JsonResponse::badRequest('Could not generate PDF.');
         }
-
-        $metrics_logger->end()->log('PDF created.');
-
-        JsonResponse::created(['pdf' => $pdf]);
     }
 }
