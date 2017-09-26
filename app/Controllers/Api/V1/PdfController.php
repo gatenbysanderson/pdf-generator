@@ -19,14 +19,14 @@ class PdfController
     {
         try {
             $metrics_logger = resolve(MetricsLogger::class)->start();
-            $pdfConversion = resolve(PdfConversion::class);
+            $pdf_conversion = resolve(PdfConversion::class);
 
             $files = $request->files()['sources']['tmp_name'];
             $files = array_map(function ($file) {
                 return file_get_contents($file);
             }, $files);
 
-            $pdf = $pdfConversion->enableJavaScript()->compile($files)->get();
+            $pdf = $pdf_conversion->enableJavaScript()->compile($files)->get();
 
             $metrics_logger->end()->log('PDF created.');
 
