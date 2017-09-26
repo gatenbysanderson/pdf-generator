@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Support\HttpRequest;
+use App\Support\JsonResponse;
 use Exception;
 
 class Router
@@ -47,9 +48,10 @@ class Router
     /**
      * Get the URI without the query string at the end.
      *
-     * @return array
+     * @param int|null $index
+     * @return string|array
      */
-    protected function getUriParts(): array
+    protected function getUriParts(int $index = null)
     {
         // Get the uri and append a question mark in case there isn't one.
         $request_uri = $_SERVER['REQUEST_URI'] . '?';
@@ -66,7 +68,7 @@ class Router
         // Explode the result on forward slashes to get the segments.
         $request_uri_parts = explode('/', $request_uri);
 
-        return $request_uri_parts;
+        return $index === null ? $request_uri_parts : $request_uri_parts[$index];
     }
 
     /**
@@ -76,8 +78,11 @@ class Router
      */
     protected function throwPageNotFoundException()
     {
-        header('HTTP/1.1 404 Not Found');
+        if ($this->getUriParts(0) === 'api') {
+            JsonResponse::notFound();
+        }
 
+        header('HTTP/1.1 404 Not Found');
         throw new Exception('Page not found.', 404);
     }
 
