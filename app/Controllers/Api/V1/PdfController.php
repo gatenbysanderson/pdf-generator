@@ -15,14 +15,6 @@ class PdfController
     /**
      * @param \App\Support\HttpRequest $request
      */
-    public function index(HttpRequest $request)
-    {
-        JsonResponse::ok($request->all());
-    }
-
-    /**
-     * @param \App\Support\HttpRequest $request
-     */
     public function store(HttpRequest $request)
     {
         try {
