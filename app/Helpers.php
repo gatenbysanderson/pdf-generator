@@ -38,5 +38,5 @@ function resolve(string $dependency)
  */
 function basePath(string $path = ''): string
 {
-    return realpath(dirname(__DIR__) . '/' . trim($path, '/'));
+    return realpath(dirname(__DIR__)) . '/' . trim($path, '/');
 }

@@ -28,7 +28,7 @@ class SqliteMetricsLogger implements MetricsLogger
     public function __construct()
     {
         $this->db = new SQLite3(basePath('database/db.sqlite'));
-        $this->db->exec('CREATE TABLE logs (id INTEGER PRIMARY KEY AUTOINCREMENT, message STRING, time_in_milliseconds INTEGER)');
+        $this->db->exec('CREATE TABLE IF NOT EXISTS logs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, message STRING NOT NULL, time_in_milliseconds INTEGER NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)');
     }
 
     /**
