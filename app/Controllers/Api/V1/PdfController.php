@@ -25,6 +25,7 @@ class PdfController
                 ? (bool)$request->input('options')['javascript']
                 : false;
             $files = $request->files()['sources']['tmp_name'];
+            $files = is_array($files) ? $files : [$files];
             $files = array_map(function ($file) {
                 return file_get_contents($file);
             }, $files);

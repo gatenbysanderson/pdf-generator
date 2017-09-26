@@ -1,3 +1,3 @@
 #!/bin/bash
 
-(echo -e "syntax on\nset ai" > /root/.vimrc) && (cp /root/.vimrc /home/ubuntu/.vimrc)
+(echo "syntax on\nset ai\nset number" > /root/.vimrc) && (cp /root/.vimrc /home/ubuntu/.vimrc)
