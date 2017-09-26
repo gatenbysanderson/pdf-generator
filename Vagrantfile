@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.99"
     config.vm.provision "shell", inline: <<-SHELL
         sh /vagrant/scripts/apt.sh
+        sh /vagrant/scripts/dpkg.sh
         sh /vagrant/scripts/php.sh
         sh /vagrant/scripts/apache.sh
         sh /vagrant/scripts/vim.sh
