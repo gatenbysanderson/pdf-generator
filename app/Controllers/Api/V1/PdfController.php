@@ -24,7 +24,7 @@ class PdfController
             $options = $request->input('options', []);
 
             // Get the enable JavaScript option.
-            $enable_java_script = array_key_exists('javascript', $options)
+            $enable_javascript = array_key_exists('javascript', $options)
                 ? (bool)$request->input('options')['javascript']
                 : false;
 
@@ -44,7 +44,7 @@ class PdfController
             }, $files);
 
             // Get the compiled string of the generated PDF.
-            $pdf = $pdf_conversion->enableJavaScript($enable_java_script)->compile($files)->get();
+            $pdf = $pdf_conversion->enableJavaScript($enable_javascript)->compile($files)->get();
 
             JsonResponse::created([
                 'type' => 'application/pdf',
