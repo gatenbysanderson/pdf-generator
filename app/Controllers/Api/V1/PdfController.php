@@ -17,17 +17,33 @@ class PdfController
     public function store(HttpRequest $request)
     {
         try {
+            // Get the PDF Conversion concrete implementation.
             $pdf_conversion = resolve(PdfConversion::class);
 
-            $enable_java_script = array_key_exists('javascript', $request->input('options', []))
+            // Get the posted options or default to an empty array.
+            $options = $request->input('options', []);
+
+            // Get the enable JavaScript option.
+            $enable_java_script = array_key_exists('javascript', $options)
                 ? (bool)$request->input('options')['javascript']
                 : false;
-            $files = $request->files()['sources']['tmp_name'];
+
+            // Get the files from the request.
+            $files = $request->files('sources');
+
+            // Throw an exception if no files where posted.
+            if ($files === null) {
+                throw new PdfNoFilesException('No source files provided.');
+            }
+
+            // Convert the files into an array of their contents as strings.
+            $files = $files['tmp_name'];
             $files = is_array($files) ? $files : [$files];
             $files = array_map(function ($file) {
                 return file_get_contents($file);
             }, $files);
 
+            // Get the compiled string of the generated PDF.
             $pdf = $pdf_conversion->enableJavaScript($enable_java_script)->compile($files)->get();
 
             JsonResponse::created([
