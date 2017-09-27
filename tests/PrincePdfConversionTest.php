@@ -3,6 +3,7 @@
 use App\Contracts\MetricsLogger;
 use App\Support\PrincePdfConversion;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Constraint\IsType;
 
 class PrincePdfConversionTest extends TestCase
 {
@@ -55,6 +56,35 @@ class PrincePdfConversionTest extends TestCase
         $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!', 'Foo', 'Bar']);
 
         $this->assertInstanceOf(PrincePdfConversion::class, $prince_pdf_conversion);
+    }
+
+    public function test_get_fails_when_not_compiled()
+    {
+        $this->expectException(\Exception::class);
+
+        $metrics_logger = new MetricsLoggerStub();
+        $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
+        $prince_pdf_conversion = $prince_pdf_conversion->get();
+    }
+
+    public function test_get_works_when_array_of_1_string_compiled()
+    {
+        $metrics_logger = new MetricsLoggerStub();
+        $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!']);
+        $pdf = $prince_pdf_conversion->get();
+
+        $this->assertInternalType(IsType::TYPE_STRING, $pdf);
+    }
+
+    public function test_get_works_when_array_of_3_string_compiled()
+    {
+        $metrics_logger = new MetricsLoggerStub();
+        $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!', 'Foo', 'Bar']);
+        $pdf = $prince_pdf_conversion->get();
+
+        $this->assertInternalType(IsType::TYPE_STRING, $pdf);
     }
 }
 
