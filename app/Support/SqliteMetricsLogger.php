@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Contracts\MetricsLogger;
+use RuntimeException;
 use SQLite3;
 
 class SqliteMetricsLogger implements MetricsLogger
@@ -84,12 +85,12 @@ class SqliteMetricsLogger implements MetricsLogger
      */
     protected function executionTimeInMilliseconds(): int
     {
-        if (!isset($this->start_time_in_milliseconds)) {
-            throw new \RuntimeException('Start time has not been set.');
+        if (! isset($this->start_time_in_milliseconds)) {
+            throw new RuntimeException('Start time has not been set.');
         }
 
-        if (!isset($this->end_time_in_milliseconds)) {
-            throw new \RuntimeException('End time has not been set.');
+        if (! isset($this->end_time_in_milliseconds)) {
+            throw new RuntimeException('End time has not been set.');
         }
 
         return $this->end_time_in_milliseconds - $this->start_time_in_milliseconds;

@@ -23,7 +23,7 @@ function container(string $dependency = null)
  *
  * @param string $dependency
  * @return mixed
- * @throws InvalidArgumentException|\DI\NotFoundException
+ * @throws \InvalidArgumentException|\DI\NotFoundException
  */
 function resolve(string $dependency)
 {

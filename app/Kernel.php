@@ -69,7 +69,7 @@ class Kernel
     /**
      * Return the router as a singleton.
      *
-     * @return Router
+     * @return \App\Router
      */
     public function router(): Router
     {

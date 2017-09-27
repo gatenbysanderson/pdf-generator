@@ -46,7 +46,7 @@ class PrincePdfConversion implements PdfConversion
      * Sets whether JavaScript should be enabled or disabled for this request.
      *
      * @param bool $option
-     * @return PdfConversion
+     * @return \App\Contracts\PdfConversion
      */
     public function enableJavaScript(bool $option = true): PdfConversion
     {
@@ -59,8 +59,8 @@ class PrincePdfConversion implements PdfConversion
      * Compile the set of files into a PDF stream.
      *
      * @param array $files
-     * @return PdfConversion
-     * @throws RuntimeException
+     * @return \App\Contracts\PdfConversion
+     * @throws \RuntimeException
      */
     public function compile(array $files): PdfConversion
     {
@@ -91,7 +91,7 @@ class PrincePdfConversion implements PdfConversion
      * Retrieve the PDF stream.
      *
      * @return string
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function get(): string
     {
@@ -102,7 +102,7 @@ class PrincePdfConversion implements PdfConversion
      * Retrieve the PDF stream.
      *
      * @return string
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function getCompiledContent(): string
     {

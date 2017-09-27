@@ -74,7 +74,7 @@ class Router
     /**
      * Throw an exception and return an HTTP 404 status code.
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function throwPageNotFoundException()
     {
