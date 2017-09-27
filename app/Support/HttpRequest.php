@@ -39,7 +39,7 @@ class HttpRequest
      *
      * @param string $key
      * @param null $default
-     * @return mixed|null
+     * @return string|null
      */
     public function input(string $key, $default = null)
     {
