@@ -76,11 +76,11 @@ class PrincePdfConversion implements PdfConversion
 
         ob_start();
         $conversion = $prince->convert_string_to_passthru(implode($files));
+        $this->compiled = ob_get_clean();
 
         if ($conversion !== true) {
             throw new PdfCompileException('Failed to compile the HTML file(s) into PDF format.');
         }
-        $this->compiled = ob_get_clean();
 
         $this->metrics_logger->end()->log('PDF created.');
 
