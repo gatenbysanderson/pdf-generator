@@ -75,7 +75,7 @@ class PrincePdfConversion implements PdfConversion
         $prince->setCompress(false);
 
         ob_start();
-        $conversion = $prince->convert_string_to_passthru(implode($files));
+        $conversion = $prince->convert_multiple_files_to_passthru($files);
         $this->compiled = ob_get_clean();
 
         if ($conversion !== true) {

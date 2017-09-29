@@ -39,9 +39,6 @@ class PdfController
             // Convert the files into an array of their contents as strings.
             $files = $files['tmp_name'];
             $files = is_array($files) ? $files : [$files];
-            $files = array_map(function ($file) {
-                return file_get_contents($file);
-            }, $files);
 
             // Get the compiled string of the generated PDF.
             $pdf = $pdf_conversion->enableJavaScript($enable_javascript)->compile($files)->get();
