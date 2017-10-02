@@ -11,7 +11,6 @@ class SqliteMetricsLogger implements MetricsLogger
     /**
      * Used to get the microtime as a float.
      */
-    // protected const MICROTIME_AS_FLOAT = true;
     const MICROTIME_AS_FLOAT = true;
 
     /**
