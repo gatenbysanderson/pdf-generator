@@ -73,9 +73,11 @@ class PrincePdfConversion implements PdfConversion
         $prince = new Prince('/usr/bin/prince');
         $prince->setPageMargin('45px');
         $prince->setCompress(false);
+        $prince->setJavaScript($this->enabled['javascript']);
+        $prince->setInsecure(true);
 
         ob_start();
-        $conversion = $prince->convert_string_to_passthru(implode($files));
+        $conversion = $prince->convert_multiple_files_to_passthru($files);
         $this->compiled = ob_get_clean();
 
         if ($conversion !== true) {
