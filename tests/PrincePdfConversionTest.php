@@ -1,8 +1,9 @@
 <?php
 
+namespace Tests;
+
 use App\Contracts\MetricsLogger;
 use App\Support\PrincePdfConversion;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\IsType;
 
 class PrincePdfConversionTest extends TestCase
@@ -40,20 +41,28 @@ class PrincePdfConversionTest extends TestCase
         $prince_pdf_conversion = $prince_pdf_conversion->compile([]);
     }
 
-    public function test_compile_works_when_array_of_1_string_passed()
+    public function test_compile_works_when_array_of_1_file_path_string_passed()
     {
+        createFile('page1.html', '<h1>Hello World!</h1>');
         $metrics_logger = new MetricsLoggerStub();
         $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
-        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!']);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile([storagePath('tests/page1.html')]);
 
         $this->assertInstanceOf(PrincePdfConversion::class, $prince_pdf_conversion);
     }
 
-    public function test_compile_works_when_array_of_3_string_passed()
+    public function test_compile_works_when_array_of_3_file_path_strings_passed()
     {
+        createFile('page1.html', '<h1>Hello World!</h1>');
+        createFile('page2.html', '<h1>Hello World!</h1>');
+        createFile('page3.html', '<h1>Hello World!</h1>');
         $metrics_logger = new MetricsLoggerStub();
         $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
-        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!', 'Foo', 'Bar']);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile([
+            storagePath('tests/page1.html'),
+            storagePath('tests/page2.html'),
+            storagePath('tests/page3.html')
+        ]);
 
         $this->assertInstanceOf(PrincePdfConversion::class, $prince_pdf_conversion);
     }
@@ -67,25 +76,40 @@ class PrincePdfConversionTest extends TestCase
         $prince_pdf_conversion = $prince_pdf_conversion->get();
     }
 
-    public function test_get_works_when_array_of_1_string_compiled()
+    public function test_get_works_when_array_of_1_file_path_string_compiled()
     {
+        createFile('page1.html', '<h1>Hello World!</h1>');
         $metrics_logger = new MetricsLoggerStub();
         $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
-        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!']);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile([storagePath('tests/page1.html')]);
         $pdf = $prince_pdf_conversion->get();
 
         $this->assertInternalType(IsType::TYPE_STRING, $pdf);
     }
 
-    public function test_get_works_when_array_of_3_string_compiled()
+    public function test_get_works_when_array_of_3_file_path_strings_compiled()
     {
+        createFile('page1.html', '<h1>Hello World!</h1>');
+        createFile('page2.html', '<h1>Hello World!</h1>');
+        createFile('page3.html', '<h1>Hello World!</h1>');
         $metrics_logger = new MetricsLoggerStub();
         $prince_pdf_conversion = new PrincePdfConversion($metrics_logger);
-        $prince_pdf_conversion = $prince_pdf_conversion->compile(['Hello World!', 'Foo', 'Bar']);
+        $prince_pdf_conversion = $prince_pdf_conversion->compile([
+            storagePath('tests/page1.html'),
+            storagePath('tests/page2.html'),
+            storagePath('tests/page3.html')
+        ]);
         $pdf = $prince_pdf_conversion->get();
 
         $this->assertInternalType(IsType::TYPE_STRING, $pdf);
     }
+}
+
+function createFile(string $file_name, string $contents = ''): bool
+{
+    $file_path = storagePath('tests/' . trim($file_name, '/'));
+
+    return (bool)file_put_contents($file_path, $contents);
 }
 
 class MetricsLoggerStub implements MetricsLogger

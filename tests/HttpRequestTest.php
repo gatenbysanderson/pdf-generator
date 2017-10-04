@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
+
 use App\Support\HttpRequest;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\IsType;
 
 class HttpRequestTest extends TestCase
