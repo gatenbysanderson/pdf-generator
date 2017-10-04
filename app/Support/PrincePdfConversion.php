@@ -71,7 +71,7 @@ class PrincePdfConversion implements PdfConversion
         $this->metrics_logger->start();
 
         $prince = new Prince('/usr/bin/prince');
-        $prince->setPageMargin('45px');
+        $prince->setPageMargin('0px');
         $prince->setCompress(false);
         $prince->setJavaScript($this->enabled['javascript']);
         $prince->setInsecure(true);
