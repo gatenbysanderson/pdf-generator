@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Update APT Repo Cache
-          command: apt-get update
+          command: sudo apt-get update
 
       - run:
           name: Download Fonts
