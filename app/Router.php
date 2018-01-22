@@ -36,7 +36,7 @@ class Router
             $controller = new $controller_class();
 
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST';
+                case 'POST':
                     $controller->store($this->request);
                     return;
             }
