@@ -13,7 +13,7 @@ jobs:
 
       - run:
           mame: Install Fonts
-          command: apt-get install libcairo2 libgif7 libgomp1 libpixman-1-0 ttf-mscorefonts-installer --assume-yes sudo
+          command: sudo apt-get install libcairo2 libgif7 libgomp1 libpixman-1-0 ttf-mscorefonts-installer --assume-yes
 
       - run:
           name: Install PrinceXML
