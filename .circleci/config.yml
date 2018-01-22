@@ -12,12 +12,8 @@ jobs:
           command: sudo apt-get update
 
       - run:
-          name: Download Fonts
-          command: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-
-      - run:
           mame: Install Fonts
-          command: sudo apt-get install libcairo2 libgif7 libgomp1 libpixman-1-0 ttf-mscorefonts-installer --assume-yes
+          command: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && sudo apt-get install ttf-mscorefonts-installer
 
       - run:
           name: Install PrinceXML
