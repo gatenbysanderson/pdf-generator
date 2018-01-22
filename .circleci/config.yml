@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: Update APT Repo Cache
+          command: apt-get update
+
+      - run:
           name: Download Fonts
           command: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 
