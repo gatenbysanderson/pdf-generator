@@ -9,13 +9,13 @@ jobs:
 
       - restore_cache:
           keys:
-            - princexml-{{ checksum "prince.deb" }}
+            - princexml-{{ checksum "http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb" }}
             - princexml-
       - run:
           name: Download PrinceXML
-          command: wget -N -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb
+          command: mkdir princexml && wget -nc -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb
       - save_cache:
-          key: princexml-{{ checksum "prince.deb" }}
+          key: princexml-{{ checksum "http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb" }}
           paths:
             - princexml
 
