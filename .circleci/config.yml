@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: Insatll Python Software Properties
+          command: sudo apt-get install -y python-software-properties
+
+      - run:
           name: Add Main Repo
           command: sudo add-apt-repository main
 
@@ -17,11 +21,11 @@ jobs:
 
       - run:
           name: Upgrade libfontconfig1
-          command: sudo apt-get install --only-upgrade libfontconfig1
+          command: sudo apt-get install -y --only-upgrade libfontconfig1
 
       - run:
           name: Install Image Libraries
-          command: sudo apt-get install libgif7 libjpeg8
+          command: sudo apt-get install -y libgif7 libjpeg8
 
       - run:
           name: Install PrinceXML
