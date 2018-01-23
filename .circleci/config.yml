@@ -8,6 +8,18 @@ jobs:
       - checkout
 
       - run:
+          name: Update APT Cache
+          command: sudo apt-get update
+
+      - run:
+          name: Upgrade libfontconfig1
+          command: sudo apt-get install --only-upgrade libfontconfig1
+
+      - run:
+          name: Install Image Libraries
+          command: sudo apt-get install libgif7 libjpeg8
+
+      - run:
           name: Install PrinceXML
           command: sudo bash scripts/dpkg.sh
 
