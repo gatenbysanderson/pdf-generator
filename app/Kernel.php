@@ -83,7 +83,13 @@ class Kernel
      */
     protected function loadEnvironmentVariables()
     {
-        $dot_env = new Dotenv(basePath());
+        $envFile = '.env';
+
+        if (getenv('ENV') === 'testing') {
+            $envFile .= '.testing';
+        }
+
+        $dot_env = new Dotenv(basePath(), $envFile);
         $dot_env->load();
     }
 }

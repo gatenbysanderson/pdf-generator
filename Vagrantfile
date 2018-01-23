@@ -23,4 +23,5 @@ Vagrant.configure("2") do |config|
         sh /vagrant/scripts/composer.sh
         sh /vagrant/scripts/aliases.sh
     SHELL
+    config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
   end
