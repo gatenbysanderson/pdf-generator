@@ -7,17 +7,21 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - princexml-{{ checksum "prince.deb" }}
+            - princexml-
       - run:
-          name: Upgrade libfontconfig1
-          command: sudo apt-get install -y --only-upgrade libfontconfig1
-
-      - run:
-          name: Install Image Libraries
-          command: sudo apt-get install -y libgif7 libjpeg8
+          name: Download PrinceXML
+          command: wget -N -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb
+      - save_cache:
+          key: princexml-{{ checksum "prince.deb" }}
+          paths:
+            - princexml
 
       - run:
           name: Install PrinceXML
-          command: sudo bash scripts/dpkg.sh
+          command: sudo dpkg -i /temp/prince.deb
 
       - run:
           name: Update Composer to Latest Version
