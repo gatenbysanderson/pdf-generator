@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: Add Main Repo
+          command: sudo add-apt-repository main
+
+      - run:
           name: Update APT Cache
           command: sudo apt-get update
 
