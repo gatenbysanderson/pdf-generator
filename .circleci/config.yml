@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Install PrinceXML
-          command: sudo ./scripts/dpkg.sh
+          command: sudo bash scripts/dpkg.sh
 
       - run:
           name: Update Composer to Latest Version
