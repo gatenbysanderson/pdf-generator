@@ -13,7 +13,7 @@ jobs:
             - princexml-
       - run:
           name: Download PrinceXML
-          command: mkdir -p princexml && wget -nc -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb
+          command: mkdir -p princexml && wget -nc -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb 2>/dev/null || exit 0
       - save_cache:
           key: princexml-prince_11.3-1_debian8.0_amd64.deb
           paths:
