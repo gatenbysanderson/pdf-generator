@@ -12,8 +12,8 @@ jobs:
           command: sudo apt-get install -y software-properties-common python-software-properties
 
       - run:
-          name: Add Main Repo
-          command: sudo add-apt-repository main
+          name: Add Repositories
+          command: sudo add-apt-repository main && sudo add-apt-repository universe && sudo add-apt-repository restricted && sudo add-apt-repository multiverse
 
       - run:
           name: Update APT Cache
