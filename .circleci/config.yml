@@ -8,14 +8,6 @@ jobs:
       - checkout
 
       - run:
-          name: Update APT Repo Cache
-          command: sudo apt-get update
-
-      - run:
-          mame: Install Fonts
-          command: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && sudo apt-get install ttf-mscorefonts-installer
-
-      - run:
           name: Install PrinceXML
           command: ./scripts/dpkg.sh
 
