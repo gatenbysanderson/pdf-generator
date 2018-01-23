@@ -9,19 +9,19 @@ jobs:
 
       - restore_cache:
           keys:
-            - princexml-{{ checksum "http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb" }}
+            - princexml-{{ checksum "princexml/prince.deb" }}
             - princexml-
       - run:
           name: Download PrinceXML
           command: mkdir princexml && wget -nc -O princexml/prince.deb http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb
       - save_cache:
-          key: princexml-{{ checksum "http://www.princexml.com/download/prince_11.3-1_debian8.0_amd64.deb" }}
+          key: princexml-{{ checksum "princexml/prince.deb" }}
           paths:
             - princexml
 
       - run:
           name: Install PrinceXML
-          command: sudo dpkg -i /temp/prince.deb
+          command: sudo dpkg -i princexml/prince.deb
 
       - run:
           name: Update Composer to Latest Version
