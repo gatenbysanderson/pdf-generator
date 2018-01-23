@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Insatll Python Software Properties
-          command: sudo apt-get install -y python-software-properties
+          command: sudo apt-get install -y software-properties-common python-software-properties
 
       - run:
           name: Add Main Repo
