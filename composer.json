@@ -1,4 +1,16 @@
 {
+    "authors": [
+        {
+            "name": "Ben Stones",
+            "email": "ben.stones@gatenbysanderson.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mubeen Inamdar",
+            "email": "mubeen.inamdar@gatenbysanderson.com",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {"App\\": "app/", "Tests\\": "tests/"},
         "files": [
