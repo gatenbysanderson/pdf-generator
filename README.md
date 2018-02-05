@@ -2,6 +2,12 @@
 
 An API for communicating with the PrinceXML service.
 
+## Licence
+
+Copyright &copy; GatenbySanderson Ltd.
+
+This project is open source software released under the terms of the MIT licence: see [LICENCE.md].
+
 ## Prerequisites
 
 * PHP >= 7.1
