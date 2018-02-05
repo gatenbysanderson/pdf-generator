@@ -6,7 +6,7 @@ An API for communicating with the PrinceXML service.
 
 Copyright &copy; 2017, 2018 GatenbySanderson Ltd.
 
-This project is open source software released under the terms of the MIT licence: see [LICENCE.md].
+This project is open source software released under the terms of the MIT licence: see [LICENCE.md](LICENCE.md).
 
 ## Prerequisites
 
