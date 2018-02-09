@@ -69,7 +69,7 @@ use GuzzleHttp\Client;
 
 $client = new Client();
 
-$request = $client->post(config('domains.pdfgenerator') . '/api/v1/pdf', [
+$request = $client->post(getenv('PDF_GENERATOR_URL') . '/api/v1/pdf', [
    'multipart' => [
       [
          'Content-type' => 'multipart/form-data',
