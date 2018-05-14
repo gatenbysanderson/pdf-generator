@@ -1,6 +1,6 @@
 # PDF Generator
 
-An API for communicating with the PrinceXML service.
+An API for communicating with a supported PDF conversion service, such as PrinceXML.
 
 ## Licence
 
