@@ -121,6 +121,16 @@ header('Content-Disposition: attachment; filename=download.pdf');
 echo $content;
 ```
 
+**Log File (API Calls):**
+
+A log of API executions is created at /var/www/prince-xml/database/db.sqlite.
+to connect to this SSH on the server and run 
+- cd /var/www/prince-xml/database/
+- sqlite3 db.sqlite
+- select id, message,created_at  from logs;
+- .exit;
+
+ 
 # Footnotes
 
 * The public root directory that synchronises with the folder on your local machine is located in `/vagrant`
